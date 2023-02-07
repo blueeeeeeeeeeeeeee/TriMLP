@@ -27,7 +27,7 @@ def calculate(cnt, array):
     return hr, ndcg
 
 
-def evaluator(epoch, data_loader, n_item, model, device):
+def evaluator(data_loader, n_item, model, device):
     start_time = time.time()
     cnt = Counter()
     array = np.zeros(n_item)
@@ -42,11 +42,9 @@ def evaluator(epoch, data_loader, n_item, model, device):
             cnt = count(logits, trg, cnt)
     cost_time = time.time() - start_time
     hr, ndcg = calculate(cnt, array)
-    print('Time={:.4f}, HR@1={:.4f}, HR@5={:.4f}, NDCG@5={:.4f}, HR@10={:.4f}, NDCG@10={:.4f}'
+    print('Time={:.5f}, HR@1={:.5f}, HR@5={:.5f}, NDCG@5={:.5f}, HR@10={:.5f}, NDCG@10={:.5f}'
           .format(cost_time, hr[0], hr[4], ndcg[4], hr[9], ndcg[9]))
     metrics = {'Cost Time': '{:.4f}'.format(cost_time),
                'HR@5': '{:.5f}'.format(hr[4]), 'NDCG@5': '{:.5f}'.format(ndcg[4]),
                'HR@10': '{:.5f}'.format(hr[9]), 'NDCG@10': '{:.5f}'.format(ndcg[9])}
-    # print('Time={:.4f}, HR@20={:.4f}, NDCG@20={:.4f}'.format(cost_time, hr[19], ndcg[19]))
-    # metrics = {'Cost Time': cost_time, 'HR@20': hr[19], 'NDCG@20': ndcg[19]}
     return metrics

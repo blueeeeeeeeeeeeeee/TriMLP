@@ -1,0 +1,6 @@
+Data: Beauty
+#Users: 1664
+#Items: 36938
+#Interactions: 56558
+Average Sequence Length: 33.98918269230769
+Sparsity: 0.9990798315368372

@@ -1,8 +1,8 @@
 from copy import deepcopy
-from TrainTools.collate_fn import gen_eval_batch, gen_train_batch
-from TrainTools.trainer import trainer
-from TrainTools.evaluator import evaluator
-from TrainTools.utils import reset_random_seed, LadderSampler
+from collate_fn import gen_eval_batch, gen_train_batch
+from trainer import trainer
+from evaluator import evaluator
+from utils import reset_random_seed, LadderSampler
 from torch.utils.data import DataLoader
 
 
@@ -21,7 +21,7 @@ def train_multi(model, max_len, n_epoch, train_data, eval_data, train_bsz, eval_
 
         eval_loader = DataLoader(eval_data, batch_size=eval_bsz, num_workers=4,
                                  collate_fn=lambda e: gen_eval_batch(e, eval_data, max_len))
-        current_metric = evaluator(epoch, eval_loader, eval_data.n_item, model, device)
+        current_metric = evaluator(eval_loader, eval_data.n_item, model, device)
 
         # if current_metric['HR@20'] >= best_metric['HR@20']:
         if current_metric['HR@10'] >= best_metric['HR@10']:

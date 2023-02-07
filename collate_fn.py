@@ -1,5 +1,5 @@
 import torch
-from TrainTools.utils import pad_sequence
+from utils import pad_sequence
 
 
 def gen_train_batch(batch, data_source, max_len):
